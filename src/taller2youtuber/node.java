@@ -12,8 +12,7 @@ package taller2youtuber;
 public class node {
 
     node next;
-    node prev;
-    int popularidad;
+    int popularity;
 
 }
 
@@ -21,65 +20,59 @@ class lista {
 
     node start;
     node end;
-    int size;
 
     public lista() {
-        size = 0;
+   
         start = null;
         end = null;
     }
 
-    public void add(int h) {
+    public void add(int popularity) {
         node n = new node();
-        n.popularidad = h;
+        n.popularity = popularity;
         if (start == null) {
             start = n;
-            end = n;
-            start.next = end;
-            start.prev = end;
+            end = start;
+            start.next = null;
         } else {
             end.next = n;
-            n.prev = end;
+            n.next = null;
             end = n;
         }
-        size++;
     }
 
-    public int size() {
-        return size;
-    }
-
-    public void delete(int y) {
-        node temp = start;
-        if (y == 0) {
-            start = start.next;
-            temp = start;
-            System.out.println("tu");
-            size--;
-        } else if (y == size) {
-            end = end.prev;
-            temp = end;
-            System.out.println("yo");
-            size--;
-        } else {
-            for (int i = 0; i < y; i++) {
-                System.out.println("q");
-                if (i == y) {
-                    temp.next.prev = temp.prev;
-                    temp.prev.next = temp.next;
-                }
-                temp = temp.next;
-            }
-            size--;
-        }
-
-    }
-
+    
     public void print() {
-        node tempor = start;
-        for (int k = 0; k < size; k++) {
-            System.out.print(tempor.popularidad + " ");
-            tempor = tempor.next;
+        node actual = start;
+        while(actual!=null){
+            System.out.print(actual.popularity + " ");
+            actual=actual.next;
+        }
+        System.out.println("");
+    }
+    
+    public void unpopular( int friendsToDelete){
+        node actual = new node();
+        actual =start;
+        node prev =new node();
+        
+        while(friendsToDelete!=0){
+            if(actual.next==null){
+                actual=start;
+                continue;
+            }
+            else if(actual.popularity<actual.next.popularity){
+                if(actual==start){
+                    start=start.next;
+                }
+                else{
+                    prev.next=actual.next;
+                    actual=actual.next;
+                }
+                friendsToDelete--;
+            }
+            prev=actual;
+            actual=actual.next;
         }
     }
 }

@@ -25,19 +25,7 @@ public class Youtuber {
                 list.add(friends);
             }
             
-            node tempo=list.start;
-            for(int h=0; h<list.size()-1;h++){
-                if (tempo.popularidad<tempo.next.popularidad){
-                    System.out.println(tempo.popularidad<tempo.next.popularidad);
-                    list.delete(h);
-                    tempo=tempo.prev.prev;
-                    list.print();
-                }
-                else{
-                   tempo=tempo.prev.prev;
-                    System.out.print("2 ");list.print();
-                }
-            }
+            list.unpopular(friendsToDelete);
             list.print();
         }
 
